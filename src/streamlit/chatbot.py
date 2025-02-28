@@ -1,12 +1,34 @@
+"""Financial Advisor AI Chatbot
+
+This module implements a Streamlit-based chatbot that provides financial advice using
+the Google Gemini AI model. The chatbot maintains conversation history and provides
+responsive, unbiased financial guidance.
+
+Dependencies:
+    - streamlit
+    - google.genai
+"""
+
 import streamlit as st
 from google import genai
 from google.genai import types
 
-# Initialize Gemini API
+# Initialize Gemini API with authentication
 gemini_key = "AIzaSyBd80tDTtL5Z5s5GK-Qfz1Rt6oPWr-GXjQ"
 client = genai.Client(api_key=gemini_key)
 
-def get_financial_advice(user_input):
+def get_financial_advice(user_input: str) -> str:
+    """Generate financial advice response using Gemini AI model.
+
+    Args:
+        user_input (str): The user's financial question or query
+
+    Returns:
+        str: AI-generated financial advice or error message if request fails
+
+    The function uses a system instruction to ensure the AI provides fair,
+    transparent and privacy-conscious financial advice.
+    """
     sys_instruct = """
     You are a financial advisor AI. Provide investment advice while prioritizing fairness,
     transparency, and privacy. Ensure recommendations are unbiased and explainable,prefer to answer questions some concisely except user demanded to answer in detail(maximum = 60 lines).  
